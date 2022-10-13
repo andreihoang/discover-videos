@@ -3,10 +3,10 @@ import Head from "next/head";
 import SectionCards from "../../components/Card/sectionCards";
 import styles from "../../styles/MyList.module.css";
 import { getMyList } from "../../lib/videos";
-import useRedirectUser from "../../utils/redirectUser";
+import { redirectUser } from "../../utils/redirectUser";
 
 export async function getServerSideProps(context) {
-  const { userId, token } = await useRedirectUser(context);
+  const { userId, token } = await redirectUser(context);
   if (!userId) {
     return {
       props: {},
