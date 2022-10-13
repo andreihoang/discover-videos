@@ -32,7 +32,6 @@ export default async function login(req, res) {
       setTokenCookie(token, res);
       res.send({ done: true });
     } catch (err) {
-      console.log("Error for jwt token: ", err);
       res.status(500).send({ done: false });
     }
   } else {
