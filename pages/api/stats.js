@@ -16,7 +16,7 @@ export default async function stats(req, res) {
         const { videoId, favorited, watched = true } = req.body;
         if (videoId) {
           // verify a token symmetric
-          const userId = verifyToken(token);
+          const userId = await verifyToken(token);
           const findVideo = await findVideoIdByUser(userId, videoId, token);
           const doesStatsExist = findVideo?.length > 0;
           if (doesStatsExist) {
@@ -55,6 +55,7 @@ export default async function stats(req, res) {
           const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
           const userId = decodedToken.issuer;
           const findVideo = await findVideoIdByUser(userId, videoId, token);
+
           const doesStatsExist = findVideo?.length > 0;
           if (doesStatsExist) {
             res.send(findVideo);
